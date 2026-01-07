@@ -14,6 +14,11 @@ create table labs(
     description text        
 );
 
+Alter table users(
+    add reset_token varchar(255),
+    add reset_expires Bigint;
+);
+
 INSERT INTO users (username, password)
 VALUES ('admin', 'admin123');
 
