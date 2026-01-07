@@ -8,6 +8,8 @@ router.post("/login-vuln",(req, res) =>{
     const query = `select * from users where username ='${username}' and password = '${password}'`;
 
     console.log("Vuln SQL => ", query);
+    console.log("REQ BODY:", req.body);
+
 
    db.query(query, (err, rows) => {
         if (err) {
@@ -38,6 +40,28 @@ router.post("/login-secure", (req, res) => {
         } else {
             res.send("Invalid credentials");
         }
+    });
+});
+
+
+
+router.post('/login-blind',(req, res) =>{
+    const{ username } = req.body;
+
+    const sql = `
+        select if(
+            substring(database(),1,1)='b',
+            sleep(5),
+            0
+        )
+    `;
+
+    db.query(sql,(err) => {
+        if(err) {
+            return res.json({ message:"invalid request"});
+        }
+
+        res.json({message:"request processed"});
     });
 });
 
