@@ -1,25 +1,47 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Password Reset Lab</title>
+</head>
 <body>
-<h3>Reset Password</h3>
-<input id="pass" placeholder="New password">
-<button onclick="reset()">Reset</button>
+
+<h2>Request Password Reset</h2>
+<input id="email" placeholder="email">
+<button onclick="requestReset()">Request</button>
+
+<hr>
+
+<h2>Reset Password</h2>
+<input id="token" placeholder="reset token">
+<input id="password" placeholder="new password">
+<button onclick="resetPassword()">Reset</button>
 
 <script>
-const token = new URLSearchParams(window.location.search).get('token');
-
-function reset() {
-    fetch('/api/auth/reset-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            token: token,
-            newPassword: document.getElementById('pass').value
-        })
+function requestReset() {
+  fetch('/api/reset-vuln/request', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      email: document.getElementById('email').value
     })
-    .then(res => res.json())
-    .then(data => alert(data.message));
+  })
+  .then(res => res.json())
+  .then(data => alert(JSON.stringify(data)));
+}
+
+function resetPassword() {
+  fetch('/api/reset-vuln/reset', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      token: document.getElementById('token').value,
+      password: document.getElementById('password').value
+    })
+  })
+  .then(res => res.json())
+  .then(data => alert(JSON.stringify(data)));
 }
 </script>
+
 </body>
 </html>
