@@ -3,6 +3,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const labRoutes = require('./routes/lab');
 const path = require('path');
+const resetVuln = require('./routes/reset-vuln');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 // 🔹 API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/lab', labRoutes);
+app.use('/api/reset-vuln', resetVuln);
 
 app.listen(3000, () => {
     console.log('Server running on http://localhost:3000');
