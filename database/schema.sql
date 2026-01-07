@@ -4,7 +4,10 @@ use bugbounty_lab;
 create table users(
     id int auto_increment primary key,
     username varchar(50),
-    password varchar(50)
+    password varchar(50),
+    reset_token varchar(255),
+    reset_expires Bigint,
+    session_token varchar(255)
 );
 
 create table labs(
@@ -14,10 +17,8 @@ create table labs(
     description text        
 );
 
-Alter table users(
-    add reset_token varchar(255),
-    add reset_expires Bigint;
-);
+
+
 
 INSERT INTO users (username, password)
 VALUES ('admin', 'admin123');
