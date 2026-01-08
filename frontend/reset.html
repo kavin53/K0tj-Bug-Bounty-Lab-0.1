@@ -1,47 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Password Reset Lab</title>
+  <title>Reset Password</title>
 </head>
 <body>
+  <h2>Reset Password</h2>
 
-<h2>Request Password Reset</h2>
-<input id="email" placeholder="email">
-<button onclick="requestReset()">Request</button>
+  <input id="token" placeholder="Reset Token"><br>
+  <input id="password" type="password" placeholder="New Password"><br>
 
-<hr>
+  <button onclick="resetPass()">Reset</button>
 
-<h2>Reset Password</h2>
-<input id="token" placeholder="reset token">
-<input id="password" placeholder="new password">
-<button onclick="resetPassword()">Reset</button>
+  <p id="msg"></p>
 
-<script>
-function requestReset() {
-  fetch('/api/reset-vuln/request', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      email: document.getElementById('email').value
-    })
-  })
-  .then(res => res.json())
-  .then(data => alert(JSON.stringify(data)));
-}
-
-function resetPassword() {
-  fetch('/api/reset-vuln/reset', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      token: document.getElementById('token').value,
-      password: document.getElementById('password').value
-    })
-  })
-  .then(res => res.json())
-  .then(data => alert(JSON.stringify(data)));
-}
-</script>
-
+  <script src="js/reset.js"></script>
 </body>
 </html>
