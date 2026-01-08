@@ -5,6 +5,19 @@
 </head>
 <body>
   <h2>Dashboard</h2>
+  <button onclick="checkMe()">Check Session</button>
+<p id="me"></p>
+
+<script>
+function checkMe() {
+  fetch("/api/auth/me")
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById("me").innerText = JSON.stringify(d);
+    });
+}
+</script>
+
 
   <a href="email-change.html">Change Email</a><br>
   <a href="forgot.html">Reset Password</a>
