@@ -3,13 +3,13 @@ use bugbounty_lab;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  email VARCHAR(255) UNIQUE,
-  password VARCHAR(255),
+  email VARCHAR(100) UNIQUE,
+  password VARCHAR(100),
 
-  reset_token VARCHAR(255),
+  reset_token VARCHAR(100),
   reset_expires BIGINT,
 
-  session_token VARCHAR(255)
+  session_token VARCHAR(100)
 );
 
 
@@ -23,7 +23,7 @@ create table labs(
 
 
 
-INSERT INTO users (username, email, password) VALUES ('admin', 'kavindu@mail.com','admin123');
+INSERT INTO users ( email, password) VALUES ('kavindu@mail.com','admin123');
 
 INSERT INTO labs (title, level, description)
 VALUES
