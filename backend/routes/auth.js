@@ -23,4 +23,25 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.get('/me', (req,res) =>{
+    const session = req.cookies.session;
+
+    if(!session){
+        return res.status(401).json({ message: "Not logged in" });
+    }
+
+    db.query(`select * from users where session_token=?`, [session], 
+        (err, rows)=> {
+            if(rows.length === 0){
+                return res.status(401).json({ message: "Invalid session"});
+            }
+
+            res.json({
+                email: rows[0].email,
+                message: "Session still valid"
+            });
+        }
+    );
+});
+
 module.exports = router;
