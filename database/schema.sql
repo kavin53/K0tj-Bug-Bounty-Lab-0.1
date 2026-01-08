@@ -4,6 +4,7 @@ use bugbounty_lab;
 create table users(
     id int auto_increment primary key,
     username varchar(50),
+    email varchar(100),
     password varchar(50),
     reset_token varchar(255),
     reset_expires Bigint,
@@ -20,8 +21,7 @@ create table labs(
 
 
 
-INSERT INTO users (username, password)
-VALUES ('admin', 'admin123');
+INSERT INTO users (username, email, password) VALUES ('admin', 'kavindu@mail.com','admin123');
 
 INSERT INTO labs (title, level, description)
 VALUES
