@@ -2,24 +2,30 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<div class="container">
   <h2>Dashboard</h2>
+
   <button onclick="checkMe()">Check Session</button>
-<p id="me"></p>
+
+  <p id="me"></p>
+
+  <a href="email-change.html">Change Email</a>
+</div>
 
 <script>
 function checkMe() {
   fetch("/api/auth/me")
     .then(r => r.json())
     .then(d => {
-      document.getElementById("me").innerText = JSON.stringify(d);
+      document.getElementById("me").innerText =
+        JSON.stringify(d, null, 2);
     });
 }
 </script>
 
-
-  <a href="email-change.html">Change Email</a><br>
-  <a href="forgot.html">Reset Password</a>
 </body>
 </html>
