@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const authRoutes = require('./routes/auth');
+const cookieParser = require('cookie-parser');
+const authRoutes = require('./routes/auth.routes');
 const labRoutes = require('./routes/lab');
 const path = require('path');
-const resetVuln = require('./routes/reset-vuln');
-const cookieParser = require('cookie-parser');
+const resetVuln = require('./routes/reset-vuln.routes');
 
 
 const app = express();
