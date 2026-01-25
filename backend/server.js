@@ -4,6 +4,7 @@ const authRoutes = require('./routes/auth');
 const labRoutes = require('./routes/lab');
 const path = require('path');
 const resetVuln = require('./routes/reset-vuln');
+const cookieParser = require('cookie-parser');
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/lab', labRoutes);
 app.use('/api/reset-vuln', resetVuln);
+app.use(cookieParser());
 
 app.listen(3000, () => {
     console.log('Server running on http://localhost:3000');
