@@ -68,4 +68,31 @@ router.get('/me', (req,res) =>{
     });
   });
 
+router.get('/forget', (req, res) => {
+    const {email} = req.body;
+
+    const sql = `select * from users where email = ?`;
+
+    db.query(sql ,[email],(err,result) => {
+    if(result.length ===0){
+        const token = "secret-token-"+ Math.random().toString(36).substring(2);
+
+        const resetLink = `http://${req.headers.host}/reset.html?token = ${token}`;
+
+        console.log(`reset link sent to ${email}: ${resetLink}`)
+
+        res.json({ 
+            success : true,
+            message : "Reset link has been generated."
+        });
+    } else{
+        res.json({
+            success : false,
+            message : "Email not found"
+        });
+    }
+});
+
+})
+
 module.exports = router;
